@@ -260,7 +260,7 @@ CREATE SEQUENCE pk_patologia
 
 CREATE TABLE patologia(
     id number PRIMARY KEY,
-    nombre varchar2(20) NOT NULL
+    nombre varchar2(100) NOT NULL
 );
 
 CREATE SEQUENCE pk_sintoma
@@ -271,7 +271,7 @@ CREATE SEQUENCE pk_sintoma
 
 CREATE TABLE sintoma(
     id number PRIMARY KEY,
-    nombre varchar2(20) NOT NULL
+    nombre varchar2(100) NOT NULL
 );
 
 CREATE TABLE sintomas(
