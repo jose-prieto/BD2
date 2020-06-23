@@ -16,8 +16,10 @@
 	</subDataset>
 	<parameter name="edad_mayor_a" class="java.lang.Integer"/>
 	<parameter name="edad_menor_a" class="java.lang.Integer"/>
+	<parameter name="pais" class="java.lang.String"/>
+	<parameter name="estado" class="java.lang.String"/>
 	<queryString language="plsql">
-		<![CDATA[{call REPORT2($P{ORACLE_REF_CURSOR}, $P{edad_mayor_a}, $P{edad_menor_a})}]]>
+		<![CDATA[{call REPORT2($P{ORACLE_REF_CURSOR}, $P{pais}, $P{estado}, $P{edad_mayor_a}, $P{edad_menor_a})}]]>
 	</queryString>
 	<field name="DOCUMENTO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="DOCUMENTO"/>
@@ -45,6 +47,9 @@
 	</field>
 	<field name="GENERO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="GENERO"/>
+	</field>
+	<field name="PAIS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PAIS"/>
 	</field>
 	<field name="ESTADO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ESTADO"/>
@@ -417,6 +422,18 @@
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ATENDIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="560" y="0" width="80" height="80" forecolor="#00235A" uuid="d5653d57-d190-4695-957e-61bb9dc9159e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76d5b569-846a-41cb-a168-f6567abeec1c"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAIS}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
