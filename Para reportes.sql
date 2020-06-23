@@ -52,17 +52,18 @@ create or replace NONEDITIONABLE PROCEDURE REPORT2(info OUT sys_refcursor, paiss
 
 CREATE OR REPLACE VIEW REPORTE3 AS
     SELECT p.doc_identidad DOCUMENTO, p.FOTO FOTO, p.NOMBRE NOMBER1, p.NOMBRE1 NOMBRE2, p.APELLIDO APELLIDO1, p.APELLIDO1 APELLIDO2, p.FECHA_NAC NACIMIENTO,
-            l2.nombre RESIDE, lida.nombre DESTINO, vuida.fecha_vuelo FECHAIDA
+            l2.nombre RESIDE, (select MAX(v.fecha_vuelo) FROM VUELO v WHERE v.id_destino <> l2.id AND pas.id_vuelo = v.n_vuelo) IDA,
+            (select lu.nombre FROM LUGAR lu INNER JOIN VUELO vue ON lu.id = vue.id_destino WHERE vue.id_destino <> l2.id AND pas.id_vuelo = vue.n_vuelo) DESTINO,
+            (select MAX(vu.fecha_vuelo) FROM VUELO vu WHERE vu.id_destino = l2.id AND pas.id_vuelo = vu.n_vuelo) RETORNO
         FROM PERSONA p INNER JOIN HISTORICO_RESIDENCIA h ON p.doc_identidad = h.id_persona
                         INNER JOIN LUGAR l ON h.id_lugar = l.id
                         INNER JOIN LUGAR l2 ON l.id_lugar = l2.id
-                        INNER JOIN VUELO vuIda ON vuida.id_destino = h.id_lugar
-                        INNER JOIN LUGAR lIda ON vuida.id_destino = lida.id;
-
-create or replace NONEDITIONABLE PROCEDURE REPORT3(info OUT sys_refcursor) AS
+                        INNER JOIN PASAJERO pas ON pas.id_persona = p.doc_identidad;
+                        
+create or replace PROCEDURE REPORT3(info OUT sys_refcursor) AS
     BEGIN
         OPEN info
         FOR SELECT r.DOCUMENTO DOCUMENTO, r.FOTO FOTO, r.NOMBER1 NOMBER1, NVL(r.NOMBRE2, 'N/A') NOMBRE2, r.APELLIDO1 APELLIDO1, r.RESIDE RESIDE,
-            NVL(r.APELLIDO2, 'N/A') APELLIDO2, CONCAT(FLOOR((sysdate - r.NACIMIENTO) / 365.242199), ' Años') EDAD
+            NVL(r.APELLIDO2, 'N/A') APELLIDO2, CONCAT(FLOOR((sysdate - r.NACIMIENTO) / 365.242199), ' Años') EDAD, r.ida IDA, NVL(TO_CHAR(r.retorno), 'No ha regresado') VUELTA
         FROM REPORTE3 r;
     END;

@@ -50,6 +50,12 @@
 	<field name="EDAD" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="EDAD"/>
 	</field>
+	<field name="IDA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="IDA"/>
+	</field>
+	<field name="VUELTA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VUELTA"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -324,6 +330,18 @@
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RESIDE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="0" width="81" height="80" uuid="20f75142-34f6-4153-902a-cbcb072e9b57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{IDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="801" y="0" width="81" height="80" uuid="fe3360eb-5154-44c4-8269-9dccec3d614b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9758243a-7436-40ee-9f5d-68542db55bc8"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{VUELTA}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
