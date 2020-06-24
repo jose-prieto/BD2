@@ -55,6 +55,9 @@
 	<field name="PAIS" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="PAIS"/>
 	</field>
+	<field name="PAISF" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="PAISF"/>
+	</field>
 	<field name="ESTADO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ESTADO"/>
 	</field>
@@ -223,7 +226,7 @@ que Sufre]]></text>
 	</columnHeader>
 	<detail>
 		<band height="80" splitType="Stretch">
-			<image>
+			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="0" width="80" height="80" uuid="fa2ea092-6ba3-4351-907a-b72d60687bfe">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -328,15 +331,19 @@ que Sufre]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PATOLOGIAS}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="480" y="0" width="80" height="80" forecolor="#00235A" uuid="6ce4199b-6ced-4d57-815c-897fe9bbf9d7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c7bc56c-cc32-4364-90cf-fd322245cb7e"/>
-				</reportElement>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="480" y="0" width="80" height="80" forecolor="#00235A" uuid="519d0b98-e1a8-4f7d-bf19-200f70e0f827"/>
 				<box>
-					<pen lineWidth="1.0" lineColor="#00235A"/>
+					<pen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
+				<imageExpression><![CDATA[$F{PAISF}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="480" y="60" width="80" height="20" forecolor="#00235A" uuid="f92715d0-9b42-4746-9e7c-63ba2aad3f1c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e97af565-d306-4bca-86d5-17754a782d74"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PAIS}]]></textFieldExpression>
 			</textField>

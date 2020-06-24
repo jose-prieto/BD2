@@ -51,6 +51,9 @@
 	<field name="PAIS" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="PAIS"/>
 	</field>
+	<field name="PAISF" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="PAISF"/>
+	</field>
 	<field name="ESTADO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ESTADO"/>
 	</field>
@@ -423,15 +426,19 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ATENDIDO}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="560" y="0" width="80" height="80" forecolor="#00235A" uuid="d5653d57-d190-4695-957e-61bb9dc9159e">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76d5b569-846a-41cb-a168-f6567abeec1c"/>
-				</reportElement>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="560" y="0" width="80" height="80" uuid="44f4f576-0c4a-4130-9674-a412d258f23b"/>
 				<box>
-					<pen lineWidth="1.0"/>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12"/>
+				<imageExpression><![CDATA[$F{PAISF}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="560" y="60" width="80" height="20" forecolor="#00235A" uuid="786a0a19-5f1b-41e0-be53-e11798e183b5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="35808c93-3b1b-4c41-a45e-2aa08cc01f6e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PAIS}]]></textFieldExpression>
 			</textField>

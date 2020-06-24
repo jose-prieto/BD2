@@ -23,8 +23,10 @@
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
+	<parameter name="fecha_inicio" class="java.sql.Date"/>
+	<parameter name="fecha_fin" class="java.sql.Date"/>
 	<queryString language="plsql">
-		<![CDATA[{call REPORT3($P{ORACLE_REF_CURSOR})}]]>
+		<![CDATA[{call REPORT3($P{ORACLE_REF_CURSOR}, $P{fecha_inicio}, $P{fecha_fin})}]]>
 	</queryString>
 	<field name="DOCUMENTO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="DOCUMENTO"/>
@@ -44,17 +46,29 @@
 	<field name="RESIDE" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="RESIDE"/>
 	</field>
+	<field name="PAISF" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="PAISF"/>
+	</field>
+	<field name="DESTINO" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="DESTINO"/>
+	</field>
+	<field name="DESTINOL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESTINOL"/>
+	</field>
 	<field name="APELLIDO2" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="APELLIDO2"/>
 	</field>
 	<field name="EDAD" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="EDAD"/>
 	</field>
-	<field name="IDA" class="java.sql.Timestamp">
+	<field name="IDA" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="IDA"/>
 	</field>
 	<field name="VUELTA" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="VUELTA"/>
+	</field>
+	<field name="LUGARES" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="LUGARES"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -320,8 +334,8 @@
 				<textFieldExpression><![CDATA[$F{EDAD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="560" y="0" width="80" height="80" forecolor="#00235A" uuid="6a6550ce-28e9-4a0a-b106-6f7ef4e6b1f2">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="477a5af0-c95e-45de-a686-d8ab81f4bc9c"/>
+				<reportElement x="720" y="0" width="81" height="80" forecolor="#00235A" uuid="20f75142-34f6-4153-902a-cbcb072e9b57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="1.0"/>
@@ -329,19 +343,63 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{RESIDE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="720" y="0" width="81" height="80" uuid="20f75142-34f6-4153-902a-cbcb072e9b57">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
-				</reportElement>
 				<textFieldExpression><![CDATA[$F{IDA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="801" y="0" width="81" height="80" uuid="fe3360eb-5154-44c4-8269-9dccec3d614b">
+				<reportElement x="801" y="0" width="81" height="80" forecolor="#00235A" uuid="fe3360eb-5154-44c4-8269-9dccec3d614b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9758243a-7436-40ee-9f5d-68542db55bc8"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{VUELTA}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="560" y="0" width="80" height="80" forecolor="#00235A" uuid="0f02d088-a663-4efd-b6e0-9feb3ef4ce57"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<imageExpression><![CDATA[$F{PAISF}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="560" y="60" width="80" height="20" forecolor="#00235A" uuid="66561b30-148d-451f-b5be-c21eb875d71c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="771c0d90-e4c3-4e81-9176-c1207a0d5f74"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RESIDE}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="640" y="0" width="80" height="80" uuid="f255e032-be25-4aa1-82e4-6161bbbc004c"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<imageExpression><![CDATA[$F{DESTINO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="640" y="60" width="80" height="20" forecolor="#00235A" uuid="04357d09-9713-44cf-8bfa-b6e38d42ace9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e66d424-45fe-4d53-9a1c-20b291991b7e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESTINOL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="882" y="0" width="81" height="80" forecolor="#00235A" uuid="3c894c12-5e92-4040-b9ed-20d66628f545">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6131b1d3-69ca-4050-929d-5a96f2c729bc"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LUGARES}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
