@@ -200,6 +200,7 @@ CREATE OR REPLACE PROCEDURE  Simulacion_telecomunicacionesA(fecha in date, pt in
     por number;
     compañia proveedor_internet%rowtype;
     numero number;
+    numero2 number;
     ran number;
     proba number;
 Begin
@@ -215,13 +216,17 @@ dbms_Output.put_line(por);
 	loop
     select * into compañia from(select * from proveedor_internet ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
     SELECT COUNT(*) INTO numero  FROM interrupcion where fecha_fin is null and id_proveedor=compañia.id and id_lugar=E;
-
-    if numero=0 then
+    SELECT COUNT(*) INTO numero2  FROM interrupcion where fecha_inicio=fecha and id_proveedor=compañia.id and id_lugar=E;
+    if numero=0 and numero2=0 then
     ran:=dbms_random.value(1, 100);
     
         if ran<proba then
+        
         dbms_Output.put_line('Se genero una interrupcion con la compañia'); 
         dbms_Output.put_line(compañia.nombre); 
+        INSERT INTO EX.INTERRUPCION(FECHA_INICIO, ID_PROVEEDOR, ID_LUGAR, FECHA_FIN) VALUES
+        (fecha, compañia.id, E,NULL);
+        commit;
         end if;
     
     end if;
@@ -248,6 +253,9 @@ dbms_Output.put_line('--Inicia simulacion telecomunicaciones B--');
         if ran<50 then
         dbms_Output.put_line('se termino la interrupcion de'); 
         dbms_Output.put_line(Registro_tabla.id_proveedor); 
+        
+        update interrupcion set fecha_fin=fecha where id_proveedor=Registro_tabla.id_proveedor and id_lugar=E;
+        commit;
         end if;
 
     fetch inter into Registro_tabla;
@@ -272,6 +280,8 @@ CREATE OR REPLACE PROCEDURE  Simulacion_Ayudah(fecha in date) IS
     paiscentro number;
     ran number;
     numeroi number;
+    insumo number;
+    dinero number;
     
     i1 number:=0;
     i2 number:=0;
@@ -292,6 +302,7 @@ CREATE OR REPLACE PROCEDURE  Simulacion_Ayudah(fecha in date) IS
     paisa lugar%rowtype;
     paisd lugar%rowtype;
     Registro_tabla insumo_disponible%rowtype;
+    centrosal centro_salud%rowtype;
     
 Begin
 dbms_Output.put_line('--Inicia simulacion ayuda humanitaria--'); 
@@ -329,12 +340,20 @@ dbms_Output.put_line('--Inicia simulacion ayuda humanitaria--');
     
     
         if paiscentro=pais2 then
-        ran:=dbms_random.value(100, 1000);
-        numeroi:= round(ran,0);
-        dbms_Output.put_line('Donacion a'); 
-        dbms_Output.put_line(Registro_tabla.id_centro_salud); 
-        dbms_Output.put_line(Registro_tabla.id_insumo); 
-        dbms_Output.put_line(numeroi);
+        
+            select * into centrosal from centro_salud where id=Registro_tabla.id_centro_salud;
+    
+            if centrosal.tipo='publico' then
+            ran:=dbms_random.value(100, 1000);
+            numeroi:= round(ran,0);
+            dbms_Output.put_line('Donacion a centro publico'); 
+            dbms_Output.put_line(Registro_tabla.id_centro_salud); 
+            dbms_Output.put_line(Registro_tabla.id_insumo); 
+            dbms_Output.put_line(numeroi);
+            insumo:= numeroi+Registro_tabla.cantidad;
+
+            
+            update insumo_disponible set cantidad=insumo where id_insumo=Registro_tabla.id_insumo and id_centro_salud=centrosal.id;
     
             if 1=Registro_tabla.id_insumo then
             i1:=i1+numeroi;
@@ -382,6 +401,8 @@ dbms_Output.put_line('--Inicia simulacion ayuda humanitaria--');
             i15:=i15+numeroi; 
         
             end if;
+            end if;
+            
         end if;
 
 
@@ -406,6 +427,89 @@ Close centros;
     dbms_Output.put_line(i14);
     dbms_Output.put_line(i15);
     
+  
+    dinero:=dbms_random.value(100000, 50000000);
+    dinero:= round(dinero,0);
+    INSERT INTO  AYUDA_HUMANITARIA(FECHA_RECIBIDA, ID_LUGAR_RECIBE, ID_LUGAR_ENVIA, DINERO_DONADO) VALUES
+    (fecha, pais1, pais2, dinero);
+    
+    if i1>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (1, fecha, pais1, pais2, i1);
+    
+    end if;
+    
+    if i2>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (2, fecha, pais1, pais2, i2);
+    end if;
+    
+    if i3>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (3, fecha, pais1, pais2, i3);
+    end if;
+    
+    if i4>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (4, fecha, pais1, pais2, i4);
+    end if;
+    
+    if i5>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (5, fecha, pais1, pais2, i5);
+    end if;
+    
+    if i6>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (6, fecha, pais1, pais2, i6);
+    end if;
+    
+    if i7>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (7, fecha, pais1, pais2, i7);
+    end if;
+  
+    if i8>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (8, fecha, pais1, pais2, i8);
+    end if;
+    
+    if i9>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (9, fecha, pais1, pais2, i9);
+    end if;
+    
+    if i10>0 then
+     INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (10, fecha, pais1, pais2, i10);
+    end if;
+    
+    if i11>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (11, fecha, pais1, pais2, i11);
+    end if;
+    
+    if i12>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (12, fecha, pais1, pais2, i12);
+    end if;
+    
+    if i13>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (13, fecha, pais1, pais2, i13);
+    end if;
+    
+    if i14>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (14, fecha, pais1, pais2, i14);
+    end if;
+    
+    if i15>0 then
+    INSERT INTO INSUMOS_DONADOS(ID_INSUMO,ID_AYUDA_HUMANITARIA,ID_PAIS_RECIBE,ID_PAIS_ENVIA,CANTIDAD) VALUES
+    (15, fecha, pais1, pais2, i15);
+    end if;
+
+commit;    
 dbms_Output.put_line('--Fin simulacion ayuda humanitaria--'); 
 end;
 
@@ -443,6 +547,10 @@ Begin
         ran:=dbms_random.value(100, 1000);
         insumo:= round(ran,0);
         dbms_Output.put_line(insumo);   
+        insumo:= insumo+Registro_tabla.cantidad;
+        dbms_Output.put_line(insumo);   
+        update insumo_disponible set cantidad=insumo where id_insumo=Registro_tabla.id_insumo and id_centro_salud=centrosal.id;
+        commit;
         end if;
     
     end if;
@@ -510,9 +618,11 @@ Begin
     end if;
 end;
 
-execute Simulacion(TO_DATE('2020-04-02','YYYY-MM-DD'),TO_DATE('2020-04-20','YYYY-MM-DD'),1);
+execute Simulacion(TO_DATE('2020-08-05','YYYY-MM-DD'),TO_DATE('2020-08-23','YYYY-MM-DD'),1);
+select * from insumos_donados;
+select * from interrupcion;
 execute Simulacion_patologia;
-
+select * from centro_salud;
 select * from insumo_disponible;
 Select * from lugar where tipo='Pais';
 select * from Historico_residencia where id_lugar=16;
