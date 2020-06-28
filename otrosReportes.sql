@@ -23,19 +23,17 @@ create or replace PROCEDURE REPORT1(info OUT sys_refcursor, paiss IN VARCHAR2, e
     END;
 
 --Reporte 5
-
 CREATE OR REPLACE VIEW REPORTE5 AS
     SELECT l.FOTO FOTO, l.NOMBRE NOMBRE, h.FECHA_INICIO Fechai, h.FECHA_FIN Fechaf, 'Modelo'||' '||m.TIPO||' - '||m.DESCRIPCION Modelo
     FROM LUGAR l, HISTORICO_MODELO h, MODELO m
     WHERE (m.ID = h.ID_MODELO) AND (l.ID = h.id_lugar) AND (l.tipo = 'Pais');
 
-create or replace PROCEDURE REPORT5(info OUT sys_refcursor, lugar IN VARCHAR2, model IN VARCHAR2) AS
+create or replace PROCEDURE REPORT5(info OUT sys_refcursor, lugar IN VARCHAR2, modell IN VARCHAR2) AS
     BEGIN
         OPEN info
-            FOR SELECT FOTO, NOMBRE, Fechai, NVL(Fechaf, 'Aun en vigencia') Fechaf, Modelo
+            FOR SELECT FOTO, NOMBRE, TO_CHAR(Fechai, 'DD/MM/YYYY') fechai, NVL(TO_CHAR(Fechaf, 'DD/MM/YYYY'), 'Aun en vigencia') Fechaf, Modelo
         FROM REPORTE5
-        WHERE (INSTR(LOWER(NOMBRE), LOWER(lugar)) <> 0 OR NOMBRE IS NULL)
-        AND (Modelo = model OR Modelo IS NULL);
+        WHERE (LOWER(NOMBRE) = LOWER(lugar) OR lugar IS NULL)
+        AND (Modelo = modell OR Modell IS NULL);
     END;
-            
                                                                
