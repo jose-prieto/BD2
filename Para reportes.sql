@@ -74,3 +74,18 @@ create or replace PROCEDURE REPORT3(info OUT sys_refcursor, fecha_inicio IN DATE
                 WHERE (r.ida >= fecha_inicio OR fecha_inicio IS NULL)
                     AND (NVL(r.retorno, SYSDATE-1) <= fecha_fin OR fecha_fin IS NULL);
     END;
+
+--Reporte 5
+CREATE OR REPLACE VIEW REPORTE5 AS
+    SELECT l.FOTO FOTO, l.NOMBRE NOMBRE, h.FECHA_INICIO Fechai, h.FECHA_FIN Fechaf, 'Modelo'||' '||m.TIPO||' - '||m.DESCRIPCION Modelo
+    FROM LUGAR l, HISTORICO_MODELO h, MODELO m
+    WHERE (m.ID = h.ID_MODELO) AND (l.ID = h.id_lugar) AND (l.tipo = 'Pais');
+    
+create or replace PROCEDURE REPORT5(info OUT sys_refcursor, lugar IN VARCHAR2, modell IN VARCHAR2) AS
+    BEGIN
+        OPEN info
+        FOR SELECT FOTO, NOMBRE, to_char(Fechai, 'DD-MM-YYYY') "Fecha inicio", nvl(to_char(fechaf, 'DD-MM-YYYY'), 'Aun en vigencia') "Fecha fin", Modelo
+        FROM REPORTE5
+        WHERE (LOWER(NOMBRE) = LOWER(lugar) OR NOMBRE IS NULL)
+        AND (LOWER(MODELO) = LOWER(modell) OR MODELO IS NULL);
+    END;
