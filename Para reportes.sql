@@ -123,3 +123,35 @@ create or replace PROCEDURE REPORT5(info OUT sys_refcursor, lugar IN VARCHAR2, m
         WHERE (LOWER(NOMBRE) = LOWER(lugar) OR NOMBRE IS NULL)
         AND (LOWER(MODELO) = LOWER(modell) OR MODELO IS NULL);
     END;
+
+--REPORTE 6
+CREATE OR REPLACE VIEW AUX6 AS
+SELECT p.NOMBRE, TO_DATE(f.FECHA_INFECCION,'YYYY-MM-DD') "fecha",(SELECT COUNT(a.FECHA_INFECCION) FROM ficha_medica a WHERE a.fecha_infeccion = f.FECHA_INFECCION)"cantidad"
+FROM LUGAR l, ficha_medica f, lugar p
+WHERE (l.tipo = 'Estado')
+AND p.id = l.id_lugar
+AND (f.estado IN ('infectado','cuarentena'))
+AND f.id_lugar = l.id
+ORDER BY(f.FECHA_INFECCION);
+
+CREATE OR REPLACE VIEW REPORTE6 AS
+SELECT p.FOTO,p.NOMBRE, TO_DATE(f.FECHA_INFECCION,'YYYY-MM-DD') "fecha",(SELECT SUM(a."cantidad") 
+                                            FROM AUX6 a
+                                            WHERE a.NOMBRE = p.NOMBRE
+                                            AND TO_DATE(f.FECHA_INFECCION,'YYYY-MM-DD') = a."fecha")"cantidad"
+FROM LUGAR l, ficha_medica f, lugar p
+WHERE (l.tipo = 'Estado')
+AND p.id = l.id_lugar
+AND (f.estado IN ('infectado','cuarentena'))
+AND f.id_lugar = l.id
+ORDER BY(f.FECHA_INFECCION);
+
+create or replace PROCEDURE REPORT6(info OUT sys_refcursor, paiss IN VARCHAR2, menor IN DATE, mayor IN DATE) AS
+    BEGIN
+        OPEN info
+        FOR SELECT FOTO, NOMBRE, "cantidad","fecha",ROWNUM
+        FROM REPORTE6
+            WHERE (LOWER(NOMBRE) = LOWER(paiss) OR paiss IS NULL)
+            AND ("fecha" >= menor OR menor IS NULL)
+            AND ("fecha" <= mayor OR mayor IS NULL);
+    END;
