@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1 Personas" pageWidth="1003" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="963" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32917e05-ae42-4674-883d-b7aa97511420">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BDII"/>
+	<subDataset name="Dataset1" uuid="c5ba9b4e-656b-4cc9-9b2b-9c9b66d5c310">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="ab194da4-58d8-45e5-a2d9-6824d65ee1d0">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="paiss" class="java.lang.String"/>
+	<parameter name="estadoo" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[{call REPORT4($P{ORACLE_REF_CURSOR}, $P{paiss}, $P{estadoo})}]]>
+	</queryString>
+	<field name="Pais" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Pais"/>
+	</field>
+	<field name="foto" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="foto"/>
+	</field>
+	<field name="Estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Estado"/>
+	</field>
+	<field name="Poblacion" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="Poblacion"/>
+	</field>
+	<field name="Infectados" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="Infectados"/>
+	</field>
+	<field name="Porcentaje infectados/Total poblaciónde país" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Porcentaje infectados/Total poblaciónde país"/>
+	</field>
+	<field name="fallecidos" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="fallecidos"/>
+	</field>
+	<field name="Porcentaje Fallecidos /Total poblaciónde país" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Porcentaje Fallecidos /Total poblaciónde país"/>
+	</field>
+	<field name="Recuperados" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="Recuperados"/>
+	</field>
+	<field name="Porcentaje Recuperado/Total poblaciónde país" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Porcentaje Recuperado/Total poblaciónde país"/>
+	</field>
+	<background>
+		<band height="220" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="340" y="5" width="284" height="69" forecolor="#00235A" uuid="1fc16c27-ce39-4a27-a126-6d90e37c9b1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Reporte por paises]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="863" y="0" width="100" height="30" forecolor="#00235A" uuid="e05faa59-944b-4edc-b340-83151a3dfaa7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="100" y="-20" width="120" height="98" uuid="483eb4ed-7c7f-4aa7-a2af-99e028f6177f"/>
+				<imageExpression><![CDATA["0 coronavirus.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="963" height="30" backcolor="#FFB347" uuid="f56e3619-bcb6-46e7-ab37-e6a832225340">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="107" y="0" width="107" height="30" uuid="3f69a55c-f54b-4c80-b8c8-5ce83d245751">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ba981db-02b0-4222-9f10-12af4d78ec67"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="0" width="107" height="30" uuid="ef2929dd-3fff-4832-b818-101a40246701">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="70e1ca30-7a48-41d7-9fdf-359320d2136b"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Poblacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="107" height="30" uuid="54e910a8-30f8-4ba5-826b-72a9138f3df3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c3ffe15-a776-4f5c-b434-21202799b038"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Infectados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="107" height="30" uuid="5793aa21-6af6-4063-8391-a1fe32063ab9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="49916eb8-84df-49f0-b035-fc35d0497901"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Porcentaje infectados/Total poblaciónde país]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="0" width="107" height="30" uuid="01e7cb77-d8e6-4182-8748-110be136032f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bc38b5cb-faee-4d43-8211-54b62f7c5f67"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[fallecidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="641" y="0" width="107" height="30" uuid="185de3b8-efaa-42cb-bccf-cce7989c726a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0637e393-fb21-4bdc-88e7-9f99f5766e79"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Porcentaje Fallecidos /Total poblaciónde país]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="747" y="0" width="107" height="30" uuid="295d124b-1a2d-47e3-88a8-421790d705e1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="06400312-b7c6-438f-bd18-22ef48b549f8"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Recuperados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="854" y="0" width="107" height="30" uuid="ff786eca-7514-471b-bae3-d1b02bf3e097">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="255033e8-354e-4739-9d24-7bd105b91ff2"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Porcentaje Recuperado/Total poblaciónde país]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="107" height="30" uuid="1a389f37-4fb8-42a3-aba5-f5e8f68b0fec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a539d14a-5434-46a8-aaa2-a364c0562a3d"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-12" width="107" height="62" uuid="c9a54851-4de6-4e4c-b0c9-e561ca5c4316">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="749" y="-12" width="107" height="62" uuid="a8eb2f1c-8db6-4760-a219-91e2e50e8947">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="642" y="-12" width="107" height="62" uuid="141d7aa9-94ec-4ed5-9934-edd0b0d5a0dc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="535" y="-12" width="107" height="62" uuid="83f644f9-439c-43c2-ab03-80389461e6a8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="-12" width="107" height="62" uuid="db6abc05-7dd0-48b8-9021-7b582ff0d286">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="214" y="-12" width="107" height="62" uuid="5d3a5c3f-2303-4e72-8f38-4ee49371a840">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="107" y="-12" width="107" height="62" uuid="27daa1e2-8d05-4b07-9410-4cb802757a66">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="320" y="-12" width="107" height="62" uuid="8b0801c1-f0d4-431d-a3c0-1601f2b693cb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="8" y="5" width="90" height="30" uuid="d4077365-53b3-42f6-9216-e2cc13fbef7b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{foto}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="107" y="-12" width="107" height="62" uuid="5711b6a1-6c76-4f47-9a13-684ae25b2b8c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ba981db-02b0-4222-9f10-12af4d78ec67"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="-12" width="107" height="62" uuid="5428c870-dfe2-4f41-ad8f-f411af19b868">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="70e1ca30-7a48-41d7-9fdf-359320d2136b"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Poblacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="-12" width="107" height="62" uuid="5bbd0495-52d2-4ecf-8a69-701154510d9c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c3ffe15-a776-4f5c-b434-21202799b038"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Infectados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="-12" width="107" height="62" uuid="7e8f0ffe-298c-407e-8b43-fc7baa47d707">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="49916eb8-84df-49f0-b035-fc35d0497901"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Porcentaje infectados/Total poblaciónde país}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="534" y="-12" width="107" height="62" uuid="05961d89-d05f-44e4-a256-92c0dca4c2a1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bc38b5cb-faee-4d43-8211-54b62f7c5f67"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fallecidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="-12" width="107" height="62" uuid="37f5984c-0a2a-41d2-9efe-dc7c7a48739e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0637e393-fb21-4bdc-88e7-9f99f5766e79"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Porcentaje Fallecidos /Total poblaciónde país}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="749" y="-12" width="107" height="62" uuid="a9572ca9-17f1-4f5c-9671-cb3687de61f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="06400312-b7c6-438f-bd18-22ef48b549f8"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Recuperados}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="857" y="-12" width="107" height="62" uuid="bb4592c2-b9bc-467d-9a5a-e04d73dd1bc7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="856" y="-12" width="107" height="62" uuid="96d0e7d0-ad9f-4ce1-b735-51df784a327d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="255033e8-354e-4739-9d24-7bd105b91ff2"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Porcentaje Recuperado/Total poblaciónde país}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="35" width="107" height="15" uuid="134abf0f-cd29-4e13-b7ab-01ef587d95b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a539d14a-5434-46a8-aaa2-a364c0562a3d"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Pais}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="880" y="0" width="60" height="13" forecolor="#00235A" uuid="b957830f-612c-4e0f-a583-78c399cf3da7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="940" y="0" width="22" height="13" forecolor="#00235A" uuid="f44b159f-ec20-48fa-ad4d-4139918ce484">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

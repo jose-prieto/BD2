@@ -104,19 +104,6 @@
 				</reportElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="80" height="30" forecolor="#00235A" uuid="be07e3dc-f2a1-4b68-89e2-31c03aff8b0c">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="689dbbfe-f733-4f61-98ac-bf78e2c46fff"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
-					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#00235A"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N° de Cédula]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="80" y="0" width="80" height="30" forecolor="#00235A" uuid="2d840ffa-d064-4c89-8ba6-85553a66b09a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="59c4d44d-d5b3-4068-bcb7-01b5eabb78f3"/>
 				</reportElement>
@@ -247,6 +234,19 @@
 					<font fontName="Times New Roman" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estados que Visitó]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" forecolor="#00235A" uuid="be07e3dc-f2a1-4b68-89e2-31c03aff8b0c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="689dbbfe-f733-4f61-98ac-bf78e2c46fff"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de Cédula]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

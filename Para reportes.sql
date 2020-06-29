@@ -75,6 +75,40 @@ create or replace PROCEDURE REPORT3(info OUT sys_refcursor, fecha_inicio IN DATE
                     AND (NVL(r.retorno, SYSDATE-1) <= fecha_fin OR fecha_fin IS NULL);
     END;
 
+--Reporte 4
+CREATE OR REPLACE VIEW REPORTE4 AS
+SELECT p.nombre "pais",
+       p.FOTO "foto", 
+       l.nombre "Estado", 
+       CONTROL_CASOS.total_poblacion_pais(p.NOMBRE) "Poblacion", 
+       CONTROL_CASOS.total_poblacion_estado(l.NOMBRE)"Infectados",
+       to_char((CONTROL_CASOS.total_poblacion_estado(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%' "Porcentaje",
+       CONTROL_CASOS.cantidad_fallecidos(l.NOMBRE)"fallecidos",
+       to_char((CONTROL_CASOS.cantidad_fallecidos(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%'"Porcentaje1",
+       CONTROL_CASOS.cantidad_recuperados(l.NOMBRE)"Recuperados",
+       to_char((CONTROL_CASOS.cantidad_recuperados(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%'"Porcentaje2"
+FROM lugar p, lugar l
+WHERE p.id = l.id_lugar;
+
+create or replace PROCEDURE REPORT4(info OUT sys_refcursor, paiss IN VARCHAR2, estadoo IN VARCHAR2) AS
+    BEGIN
+            OPEN info
+            FOR SELECT 
+            "Pais", 
+            "foto", 
+            "Estado", 
+            "Poblacion", 
+            "Infectados", 
+            "Porcentaje" "Porcentaje infectados/Total poblaciónde país", 
+            "fallecidos", 
+            "Porcentaje1" "Porcentaje Fallecidos /Total poblaciónde país", 
+            "Recuperados", 
+            "Porcentaje2" "Porcentaje Recuperado/Total poblaciónde país"
+            FROM REPORTE4
+            WHERE (LOWER("Pais") = LOWER(paiss) OR paiss IS NULL)
+            AND (LOWER("Estado") = LOWER(estadoo) OR estadoo IS NULL);
+    END;
+
 --Reporte 5
 CREATE OR REPLACE VIEW REPORTE5 AS
     SELECT l.FOTO FOTO, l.NOMBRE NOMBRE, h.FECHA_INICIO Fechai, h.FECHA_FIN Fechaf, 'Modelo'||' '||m.TIPO||' - '||m.DESCRIPCION Modelo
