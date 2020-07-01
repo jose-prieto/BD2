@@ -1,10 +1,5 @@
 set serveroutput on size unlimited;
 
-CREATE OR REPLACE PROCEDURE  Simulacion_patologia IS 
-Begin
-dbms_Output.put_line(' Inicia simulacion patologia'); 
-
-end;
 
 CREATE OR REPLACE PROCEDURE  Simulacion_Virus(fecha in date, P in number, pt in number, pv in number) IS 
     Cursor Estados is
@@ -49,7 +44,12 @@ CREATE OR REPLACE PROCEDURE  Simulacion_infeccion(fecha in date, P in number, E 
     per ficha_medica%rowtype;
     contagiados number;
     pcontagiados number;
+    
+    numero_camas number:=0;
+    centro centro_salud%rowtype;
 Begin
+
+    
     dbms_Output.put_line('--Inicia simulacion infeccion--'); 
     SELECT COUNT(*) INTO numero  FROM historico_residencia where id_lugar=E  ;
     por:=numero*P;
@@ -79,8 +79,24 @@ Begin
     SELECT COUNT(*) INTO numero  FROM ficha_medica where estado='infectado' and id_persona=per.id_persona;
 	
 	if per.estado='desconocido' or per.estado='sano' then
+    
+    select * into centro from centro_salud where id_lugar=E;
+    select count(id) into numero_camas from ficha_medica where id_lugar=E and id_centro_salud=centro.id ;
     dbms_Output.put_line('Se infecta a la persona:'); 
     dbms_Output.put_line(per.id_persona); 
+
+    
+        if centro.camas_disponibles>numero_camas then
+        dbms_Output.put_line('En centro de salud');
+        update ficha_medica set estado='infectado', id_centro_salud=centro.id, fecha_recuperacion=null, fecha_infeccion=fecha where id_persona=per.id_persona;
+        
+        else
+        update ficha_medica set estado='infectado', id_centro_salud=Null, fecha_recuperacion=null, fecha_infeccion=fecha where id_persona=per.id_persona;
+        dbms_Output.put_line('Ya no hay camas disponibles en este estado');
+        
+        
+        end if;
+    
     end if;
     
     
@@ -95,6 +111,8 @@ CREATE OR REPLACE PROCEDURE  Simulacion_recuperacion(fecha in date, E in number)
     cura number;
     per ficha_medica%rowtype;
     posi number;
+    
+    
 Begin
 dbms_Output.put_line('--Inicia simulacion recuperacion--'); 
     SELECT COUNT(*) INTO numero  FROM ficha_medica where id_lugar=E and estado='infectado' ;
@@ -114,7 +132,8 @@ dbms_Output.put_line('--Inicia simulacion recuperacion--');
     dbms_Output.put_line('posi'); 
     dbms_Output.put_line(posi); 
 	if per.estado='infectado' and posi<5 then
-    
+    update ficha_medica set estado='curado', id_centro_salud=Null, fecha_recuperacion=fecha where id_persona=per.id_persona;
+    commit;
     dbms_Output.put_line('Se curo la persona:'); 
     dbms_Output.put_line(per.id_persona); 
     end if;
@@ -144,10 +163,12 @@ Begin
     posi:=dbms_random.value(1, 100);
     dbms_Output.put_line('posi'); 
     dbms_Output.put_line(posi); 
-	if per.estado='infectado' and posi<3 then
-    
+	if per.estado='infectado' and posi<3 then  
+
     dbms_Output.put_line('F por :'); 
     dbms_Output.put_line(per.id_persona); 
+    update ficha_medica set estado='fallecido', id_centro_salud=Null where id_persona=per.id_persona;
+    commit;
     end if;
 
     end loop; 
@@ -157,21 +178,46 @@ end;
 CREATE OR REPLACE PROCEDURE  Simulacion_vuelos(fecha in date, pv in number, E in number) IS 
     Cursor personas is
     Select * from historico_residencia where fecha_fin is NULL and id_lugar=E;  
-    
+ 
     maximo number;
     aero aerolinea%rowtype;
     Registro_tabla historico_residencia%rowtype;
     visi visita%rowtype;
     numero number;
     ran number;
+    viaje number:=0;
+    inter number:=0;
+    estado number:=0;
+    
+    pais1 number;
+    pais2 number;
+    estado2 number;
+    
+    cierre1 number;
+    cierre2 number;
     
 Begin
+
+    select id_lugar into pais1 from lugar where id=E;
+    select id into pais2 from(select id from lugar where id<>pais1 and id_lugar is null ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1; 
+    
+    
+    SELECT COUNT(*) INTO cierre1  FROM cierre_frontera where id_lugar=pais1 and fecha_fin is null ;
+    SELECT COUNT(*) INTO cierre2  FROM cierre_frontera where id_lugar=pais2 and fecha_fin is null ;
+
+
+    if cierre1<>1 and cierre2<>1 then
+
     select max(N_vuelo) into maximo from vuelo;
+
 	select * into aero from(select * from aerolinea  ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
     maximo:=maximo+1;
     dbms_Output.put_line('--Inicia simulacion vuelos--'); 
     dbms_Output.put_line(maximo); 
     dbms_Output.put_line(aero.nombre); 
+    
+     
+    select id into estado2 from(select id from lugar where id_lugar=pais2 ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
     
     open personas;
     fetch personas into Registro_tabla;
@@ -179,14 +225,28 @@ Begin
     LOOP
 
     SELECT COUNT(*) INTO numero  FROM visita where id_persona=Registro_tabla.id_persona and fecha_salida is not null;
- 
- 
+
     if numero=1 then
     ran:=dbms_random.value(1, 100);
     
         if ran<30 then
+        
+            if inter=0 then
+            dbms_Output.put_line('se crea vuelo'); 
+            INSERT INTO EX.VUELO(N_VUELO, FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO) VALUES
+            (maximo, fecha, aero.id, pais1, pais2);
+            inter:=1;
+            end if;
+        
         dbms_Output.put_line('la siguiente persona viajo'); 
-        dbms_Output.put_line(Registro_tabla.id_persona); 
+        dbms_Output.put_line(Registro_tabla.id_persona);
+                    
+        INSERT INTO EX.PASAJERO(ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_DESTINO, ID_ORIGEN) VALUES
+        (Registro_tabla.id_persona,maximo , fecha, aero.id, pais2, pais1);
+        
+        INSERT INTO EX.VISITA(FECHA_INGRESO, ID_LUGAR, ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO, FECHA_SALIDA) VALUES
+        (fecha, E , Registro_tabla.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
+        
         end if;
     
     end if;
@@ -194,6 +254,13 @@ Begin
     fetch personas into Registro_tabla;
     end loop;  
     dbms_Output.put_line('--Fin simulacion vuelos--'); 
+    commit;
+    
+    else
+    dbms_Output.put_line('fronteras cerradas, no es posible realizar el vuelo');
+    
+    end if;
+    
 end;
 
 CREATE OR REPLACE PROCEDURE  Simulacion_telecomunicacionesA(fecha in date, pt in number, E in number) IS 
@@ -592,7 +659,6 @@ Begin
     
     
     dbms_Output.put_line(P);
-    Simulacion_patologia;
     factual:=fecha_inicio;
     ayuda:=15;
     for i in 1..dias+1
@@ -618,7 +684,10 @@ Begin
     end if;
 end;
 
-execute Simulacion(TO_DATE('2020-08-05','YYYY-MM-DD'),TO_DATE('2020-08-23','YYYY-MM-DD'),1);
+
+
+execute Simulacion(TO_DATE('2020-12-01','YYYY-MM-DD'),TO_DATE('2020-12-20','YYYY-MM-DD'),1);
+
 select * from insumos_donados;
 select * from interrupcion;
 execute Simulacion_patologia;
@@ -627,7 +696,7 @@ select * from insumo_disponible;
 Select * from lugar where tipo='Pais';
 select * from Historico_residencia where id_lugar=16;
 select * from persona;
-select * from ficha_medica where estado='desconido';
+select * from ficha_medica;
 select * from(select * from ficha_medica where id_lugar=16 ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
 
 select * from visita;
