@@ -1,7 +1,7 @@
 from faker import Faker
 from random import randint
 fake = Faker()
-i = 1000
+i = 300
 j = 0
 fic = open("personas.sql","w")
 id_persona = 50

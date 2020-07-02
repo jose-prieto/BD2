@@ -81,8 +81,8 @@ SELECT p.nombre "pais",
        p.FOTO "foto", 
        l.nombre "Estado", 
        CONTROL_CASOS.total_poblacion_pais(p.NOMBRE) "Poblacion", 
-       CONTROL_CASOS.total_poblacion_estado(l.NOMBRE)"Infectados",
-       to_char((CONTROL_CASOS.total_poblacion_estado(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%' "Porcentaje",
+       CONTROL_CASOS.cantidad_infectados(l.NOMBRE)"Infectados",
+       to_char((CONTROL_CASOS.cantidad_infectados(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%' "Porcentaje",
        CONTROL_CASOS.cantidad_fallecidos(l.NOMBRE)"fallecidos",
        to_char((CONTROL_CASOS.cantidad_fallecidos(l.NOMBRE)/CONTROL_CASOS.total_poblacion_pais(p.NOMBRE))*100,'999,99')||'%'"Porcentaje1",
        CONTROL_CASOS.cantidad_recuperados(l.NOMBRE)"Recuperados",
@@ -94,7 +94,7 @@ create or replace PROCEDURE REPORT4(info OUT sys_refcursor, paiss IN VARCHAR2, e
     BEGIN
             OPEN info
             FOR SELECT 
-            "Pais", 
+            "pais", 
             "foto", 
             "Estado", 
             "Poblacion", 
@@ -105,7 +105,7 @@ create or replace PROCEDURE REPORT4(info OUT sys_refcursor, paiss IN VARCHAR2, e
             "Recuperados", 
             "Porcentaje2" "Porcentaje Recuperado/Total poblaciónde país"
             FROM REPORTE4
-            WHERE (LOWER("Pais") = LOWER(paiss) OR paiss IS NULL)
+            WHERE (LOWER("pais") = LOWER(paiss) OR paiss IS NULL)
             AND (LOWER("Estado") = LOWER(estadoo) OR estadoo IS NULL);
     END;
 

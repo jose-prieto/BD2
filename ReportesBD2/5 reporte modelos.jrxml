@@ -131,7 +131,7 @@
 	<detail>
 		<band height="108" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="10" width="240" height="75" forecolor="#00235A" uuid="68bc9b91-3b56-4d1b-8d47-061c4c2cbfe5"/>
+				<reportElement x="0" y="0" width="240" height="85" forecolor="#00235A" uuid="68bc9b91-3b56-4d1b-8d47-061c4c2cbfe5"/>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 					<pen lineWidth="1.0"/>
 					<bottomPen lineWidth="0.0"/>
