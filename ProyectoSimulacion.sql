@@ -74,8 +74,8 @@ Begin
 	select * into per from(select * from ficha_medica where id_lugar=E ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
     SELECT COUNT(*) INTO numero  FROM ficha_medica where estado='infectado' and id_persona=per.id_persona;
 	
-	if per.estado='desconocido' or per.estado='sano' then
-    
+	if per.estado='desconido' or per.estado='sano' then
+
     select * into centro from centro_salud where id_lugar=E;
     select count(id) into numero_camas from ficha_medica where id_lugar=E and id_centro_salud=centro.id ;
     select * into persona1 from persona where doc_identidad=per.id_persona;
@@ -172,10 +172,16 @@ end;
 CREATE OR REPLACE PROCEDURE  Simulacion_vuelos(fecha in date, pv in number, E in number) IS 
     Cursor personas is
     Select * from historico_residencia where fecha_fin is NULL and id_lugar=E;  
+    
+    cursor visitantes is
+    select * from visita where id_destino=E and fecha_salida is null;
+
  
     maximo number;
     aero aerolinea%rowtype;
     Registro_tabla historico_residencia%rowtype;
+    Registro_tabla2 visita%rowtype;
+    
     persona1  persona%rowtype;
     visi visita%rowtype;
     numero number;
@@ -190,6 +196,8 @@ CREATE OR REPLACE PROCEDURE  Simulacion_vuelos(fecha in date, pv in number, E in
     
     cierre1 number;
     cierre2 number;
+    casa number;
+    paiscasa number;
     
 Begin
 
@@ -216,9 +224,10 @@ Begin
     while personas%Found
     LOOP
 
-    SELECT COUNT(*) INTO numero  FROM visita where id_persona=Registro_tabla.id_persona and fecha_salida is not null;
+    SELECT COUNT(*) INTO numero  FROM visita where id_persona=Registro_tabla.id_persona and fecha_salida is null;
     select * into persona1 from persona where doc_identidad=Registro_tabla.id_persona;
-    if numero=1 then
+    
+    if numero=0 then
     ran:=dbms_random.value(1, 100);
     
         if ran<30 then
@@ -250,13 +259,54 @@ Begin
     
     
     
+
+    open visitantes;
+    fetch visitantes into Registro_tabla2;
+    while visitantes%Found
+    LOOP
+    
+    select * into persona1 from persona where doc_identidad=Registro_tabla2.id_persona;
+    ran:=dbms_random.value(1, 100);
+    
+        if ran<30 then    
+        
+            if inter=0 then
+            dbms_Output.put_line('--------La aereolinea '||aero.nombre||' inicio un vuelo '||maximo||'--------'); 
+            INSERT INTO EX.VUELO(N_VUELO, FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO) VALUES
+            (maximo, fecha, aero.id, pais1, pais2);
+            inter:=1;
+            end if;    
+
+        dbms_Output.put_line('la siguiente persona viajo '||persona1.nombre||' '||persona1.apellido||', de documento de identidad '||persona1.doc_identidad); 
+
+        select id_lugar into casa from historico_residencia where id_persona=Registro_tabla2.id_persona;
+        select id_lugar into paiscasa from lugar where id=casa;
+
+        
+        update visita set fecha_salida=fecha where id_persona=Registro_tabla2.id_persona and fecha_salida is null;
+        
+        if pais1=paiscasa then
+        dbms_Output.put_line('La persona regreso a su pais de origen ');
+        
+        else
+                   
+        INSERT INTO EX.PASAJERO(ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_DESTINO, ID_ORIGEN) VALUES
+        (Registro_tabla2.id_persona,maximo , fecha, aero.id, pais2, pais1);
+        
+        INSERT INTO EX.VISITA(FECHA_INGRESO, ID_LUGAR, ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO, FECHA_SALIDA) VALUES
+        (fecha, E , Registro_tabla2.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
+        
+        end if;
+        
+        end if;
+
+    fetch visitantes into Registro_tabla2;
+    end loop; 
+
     
     
     dbms_Output.put_line('------------------------------------------------'); 
-    commit;
-    
-    
-    
+    commit;  
     
     else
     dbms_Output.put_line('fronteras cerradas, no es posible realizar el vuelo');
@@ -383,21 +433,11 @@ Begin
     select nombre into salida1 from lugar where id=pais1;
     dbms_Output.put_line('Se inicia una ayuda humanitaria'); 
     dbms_Output.put_line('pais que recibe: '||salida1); 
-    select * from ficha_medica;
-    WHILE condicion=0
-    LOOP
-
-    select id_lugar into estado2 from(select id_lugar, rownum as rn from(select count(id_lugar),id_lugar from ficha_medica where estado='infectado' group by id_lugar order by count(id_lugar) asc))where rn=buscador;
-    select id_lugar into pais2 from lugar where id=estado2;
+    select id into pais2 from(select * from lugar where id<>pais1 and id_lugar is null ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
     
-    if pais2<>pais1 then
-    condicion:=1;
-    else
-    buscador:=buscador+1;
-    end if;
 
     
-    END loop;
+    
     select nombre into salida2 from lugar where id=pais2;
     dbms_Output.put_line('Pais que envia: '||salida2); 
 
@@ -670,7 +710,7 @@ end;
 
 
 
-execute Simulacion(TO_DATE('2021-04-01','YYYY-MM-DD'),TO_DATE('2021-04-20','YYYY-MM-DD'),1);
+execute Simulacion(TO_DATE('2021-06-01','YYYY-MM-DD'),TO_DATE('2021-06-16','YYYY-MM-DD'),0);
 
 select * from insumos_donados;
 select * from interrupcion;
