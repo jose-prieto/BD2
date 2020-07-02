@@ -8,6 +8,7 @@ CREATE OR REPLACE PROCEDURE  Simulacion_Virus(fecha in date, P in number, pt in 
     E number;
     Registro_tabla Lugar%rowtype;
     ran number;
+    porv number;
 Begin
 
     open Estados;
@@ -23,8 +24,8 @@ Begin
     Simulacion_telecomunicacionesA(fecha, pt,E);
     Simulacion_telecomunicacionesB(fecha, pt,E);
     ran:=dbms_random.value(1, 100);
-    
-    if p=0.70 and ran<50 then
+    porv:=pv*100;
+    if ran<porv then
     Simulacion_vuelos(fecha , pv ,E);
     end if;
     
@@ -179,10 +180,11 @@ end;
 
 CREATE OR REPLACE PROCEDURE  Simulacion_vuelos(fecha in date, pv in number, E in number) IS 
     Cursor personas is
-    Select * from historico_residencia where fecha_fin is NULL and id_lugar=E;  
+    Select * from historico_residencia where fecha_fin is NULL and id_lugar=E; 
     
+
     cursor visitantes is
-    select * from visita where id_destino=E and fecha_salida is null;
+    select * from visita where id_lugar=E and fecha_salida is null;
 
  
     maximo number;
@@ -256,7 +258,7 @@ Begin
         (Registro_tabla.id_persona,maximo , fecha, aero.id, pais2, pais1);
         
         INSERT INTO EX.VISITA(FECHA_INGRESO, ID_LUGAR, ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO, FECHA_SALIDA) VALUES
-        (fecha, E , Registro_tabla.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
+        (fecha, estado2, Registro_tabla.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
         
         end if;
     
@@ -302,7 +304,7 @@ Begin
         (Registro_tabla2.id_persona,maximo , fecha, aero.id, pais2, pais1);
         
         INSERT INTO EX.VISITA(FECHA_INGRESO, ID_LUGAR, ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_ORIGEN, ID_DESTINO, FECHA_SALIDA) VALUES
-        (fecha, E , Registro_tabla2.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
+        (fecha, estado2, Registro_tabla2.id_persona, maximo, fecha, aero.id, pais1, pais2, NULL);
         
         end if;
         
@@ -718,7 +720,7 @@ end;
 
 
 
-execute Simulacion(TO_DATE('2021-06-01','YYYY-MM-DD'),TO_DATE('2021-06-16','YYYY-MM-DD'),0);
+execute Simulacion(TO_DATE('2021-09-01','YYYY-MM-DD'),TO_DATE('2021-09-16','YYYY-MM-DD'),0);
 
 select * from insumos_donados;
 select * from interrupcion;
@@ -730,6 +732,10 @@ select * from Historico_residencia where id_lugar=16;
 select * from persona;
 select * from ficha_medica;
 select * from(select * from ficha_medica where id_lugar=16 ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
+select * from ayuda_humanitaria;
 
-select * from visita;
+select * from visita where id_persona='00036';
+select * from cierre_frontera;
+
+
 
