@@ -45,7 +45,14 @@ CREATE OR REPLACE PROCEDURE  Simulacion_infeccion(fecha in date, P in number, E 
     
     numero_camas number:=0;
     centro centro_salud%rowtype;
+    visitantes number;
 Begin
+
+    select count(id_persona) into visitantes from(select visita.id_persona 
+    from visita
+    inner join ficha_medica
+    on visita.id_persona=ficha_medica.id_persona
+    where ficha_medica.estado='infectado' and visita.id_destino=E and fecha_salida is null);
 
     
     SELECT COUNT(*) INTO numero  FROM historico_residencia where id_lugar=E  ;
@@ -68,6 +75,7 @@ Begin
     if p=0.70 then
     contagiados:=contagiados*2;
     end if;
+    contagiados:=contagiados+visitantes;
     
     for i in 1..contagiados
 	loop
