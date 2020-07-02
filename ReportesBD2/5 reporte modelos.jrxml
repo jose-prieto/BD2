@@ -11,7 +11,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexReportes"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BDII"/>
 	<subDataset name="Dataset1" uuid="c5ba9b4e-656b-4cc9-9b2b-9c9b66d5c310">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString>
@@ -34,11 +34,11 @@
 	<field name="NOMBRE" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
 	</field>
-	<field name="FECHAI" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="FECHAI"/>
+	<field name="Fecha inicio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Fecha inicio"/>
 	</field>
-	<field name="FECHAF" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="FECHAF"/>
+	<field name="Fecha fin" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Fecha fin"/>
 	</field>
 	<field name="MODELO" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="MODELO"/>
@@ -129,9 +129,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="107" splitType="Stretch">
+		<band height="108" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="240" height="85" forecolor="#00235A" uuid="68bc9b91-3b56-4d1b-8d47-061c4c2cbfe5"/>
+				<reportElement x="0" y="10" width="240" height="75" forecolor="#00235A" uuid="68bc9b91-3b56-4d1b-8d47-061c4c2cbfe5"/>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
 					<pen lineWidth="1.0"/>
 					<bottomPen lineWidth="0.0"/>
@@ -152,30 +152,6 @@
 				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="240" y="0" width="240" height="107" forecolor="#00235A" uuid="782efd08-6776-4f96-bdde-217a2cc5e0d9">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d9ddbce-e613-4065-bcf3-5409251bd3ac"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{FECHAI}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="480" y="0" width="240" height="107" forecolor="#00235A" uuid="a9e1d38f-a7bf-4b07-ae9e-edfc2173b523">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1703e939-6e61-4e7e-b153-715c7f476adb"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{FECHAF}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="720" y="0" width="243" height="107" forecolor="#00235A" uuid="fa2e62d9-590b-483f-8e2b-0b6c6d8c9b3b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8d6e643-432b-449a-a212-ef29a3222291"/>
 				</reportElement>
@@ -186,6 +162,30 @@
 					<font size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MODELO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="240" y="0" width="240" height="107" uuid="90f7e513-a4a2-46e3-a293-e25e1c249aa6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="0" width="240" height="107" uuid="3ed41275-ca78-4426-a53d-61b8c7075977"/>
+			</rectangle>
+			<textField>
+				<reportElement x="240" y="0" width="240" height="107" uuid="19c1f8c4-9efb-49fa-8324-9d9860753299">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbbdbf80-5f7f-4854-9e90-fab9fb1441a2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="240" height="107" uuid="6ea84a83-3665-4965-9e51-541cc275dfed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d971f64-0a4c-4a72-bdb2-65d9cd3bddf7"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha fin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
