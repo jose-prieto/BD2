@@ -213,7 +213,7 @@ Begin
 
     select id_lugar into pais1 from lugar where id=E;
     select id into pais2 from(select id from lugar where id<>pais1 and id_lugar is null ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1; 
-    
+ 
     
     SELECT COUNT(*) INTO cierre1  FROM cierre_frontera where id_lugar=pais1 and fecha_fin is null ;
     SELECT COUNT(*) INTO cierre2  FROM cierre_frontera where id_lugar=pais2 and fecha_fin is null ;
@@ -228,6 +228,7 @@ Begin
   
      
     select id into estado2 from(select id from lugar where id_lugar=pais2 ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
+
     
     open personas;
     fetch personas into Registro_tabla;
@@ -296,7 +297,9 @@ Begin
         update visita set fecha_salida=fecha where id_persona=Registro_tabla2.id_persona and fecha_salida is null;
         
         if pais1=paiscasa then
-        dbms_Output.put_line('La persona regreso a su pais de origen ');
+
+        INSERT INTO EX.PASAJERO(ID_PERSONA, ID_VUELO, ID_FECHA_VUELO, ID_AEROLINEA, ID_DESTINO, ID_ORIGEN) VALUES
+        (Registro_tabla2.id_persona,maximo , fecha, aero.id, pais2, pais1);
         
         else
                    
@@ -720,7 +723,7 @@ end;
 
 
 
-execute Simulacion(TO_DATE('2021-09-01','YYYY-MM-DD'),TO_DATE('2021-09-16','YYYY-MM-DD'),0);
+execute Simulacion(TO_DATE('2021-12-01','YYYY-MM-DD'),TO_DATE('2021-12-16','YYYY-MM-DD'),0);
 
 select * from insumos_donados;
 select * from interrupcion;
@@ -734,8 +737,10 @@ select * from ficha_medica;
 select * from(select * from ficha_medica where id_lugar=16 ORDER BY DBMS_RANDOM.RANDOM)WHERE  rownum <= 1;
 select * from ayuda_humanitaria;
 
-select * from visita where id_persona='00036';
+select * from visita;
 select * from cierre_frontera;
 
+update visita set fecha_salida=TO_DATE('2021-10-16','YYYY-MM-DD') where id_persona='00008';
 
+ 
 
