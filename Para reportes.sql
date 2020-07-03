@@ -68,11 +68,11 @@ create or replace PROCEDURE REPORT3(info OUT sys_refcursor, fecha_inicio IN DATE
     BEGIN
         OPEN info
         FOR SELECT r.DOCUMENTO DOCUMENTO, r.FOTO FOTO, r.NOMBER1 NOMBER1, NVL(r.NOMBRE2, 'N/A') NOMBRE2, r.APELLIDO1 APELLIDO1, r.RESIDE RESIDE, r.PAISF PAISF,
-                    r.DESTINO DESTINO, r.DESTINOL, NVL(r.APELLIDO2, 'N/A') APELLIDO2, CONCAT(FLOOR((sysdate - r.NACIMIENTO) / 365.242199), ' AÃ±os') EDAD,
+                    r.DESTINO DESTINO, r.DESTINOL, NVL(r.APELLIDO2, 'N/A') APELLIDO2, CONCAT(FLOOR((sysdate - r.NACIMIENTO) / 365.242199), ' Años') EDAD,
                     TO_CHAR(r.ida, 'DD/MM/YYYY') IDA, NVL(TO_CHAR(r.retorno, 'DD/MM/YYYY'), 'No ha  regresado') VUELTA, r.LUGARES
             FROM REPORTE3 r
-                WHERE (r.ida >= fecha_inicio OR fecha_inicio IS NULL)
-                    AND (NVL(r.retorno, SYSDATE-1) <= fecha_fin OR fecha_fin IS NULL);
+                WHERE (NVL(r.ida, (NVL(r.retorno, SYSDATE) - 1)) >= (fecha_inicio - 1) OR fecha_inicio IS NULL)
+                    AND (NVL(r.retorno, SYSDATE) <= (fecha_fin + 1) OR fecha_fin IS NULL);
     END;
 
 --Reporte 4
@@ -152,6 +152,7 @@ create or replace PROCEDURE REPORT6(info OUT sys_refcursor, paiss IN VARCHAR2, m
         FOR SELECT FOTO, NOMBRE, "cantidad","fecha",ROWNUM
         FROM REPORTE6
             WHERE (LOWER(NOMBRE) = LOWER(paiss) OR paiss IS NULL)
-            AND ("fecha" >= menor OR menor IS NULL)
-            AND ("fecha" <= mayor OR mayor IS NULL);
+            AND (TO_DATE("fecha",'YYYY-MM-DD') >= TO_DATE(menor,'YYYY-MM-DD') OR menor IS NULL)
+            AND (TO_DATE("fecha",'YYYY-MM-DD') <= TO_DATE(mayor,'YYYY-MM-DD') OR mayor IS NULL)
+            ORDER BY("fecha");
     END;
