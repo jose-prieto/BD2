@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1 Personas" pageWidth="758" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="718" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32917e05-ae42-4674-883d-b7aa97511420">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexReportes"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Dataset1" uuid="c5ba9b4e-656b-4cc9-9b2b-9c9b66d5c310">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="ab194da4-58d8-45e5-a2d9-6824d65ee1d0">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString language="plsql">
+		<![CDATA[{call REPORT9($P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="FOTO_ENVIA" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="FOTO_ENVIA"/>
+	</field>
+	<field name="FOTO_RECIBE" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="FOTO_RECIBE"/>
+	</field>
+	<field name="FECHA_RECIBIDA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FECHA_RECIBIDA"/>
+	</field>
+	<field name="DINERO_DONADO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DINERO_DONADO"/>
+	</field>
+	<field name="NOM_ENVIA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOM_ENVIA"/>
+	</field>
+	<field name="NOM_RECIBE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOM_RECIBE"/>
+	</field>
+	<field name="INSUMOSD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="INSUMOSD"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="169" y="0" width="379" height="69" forecolor="#00235A" uuid="1fc16c27-ce39-4a27-a126-6d90e37c9b1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Ayuda Humanitaria]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="618" y="0" width="100" height="30" forecolor="#00235A" uuid="e05faa59-944b-4edc-b340-83151a3dfaa7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="30" y="-18" width="120" height="98" uuid="483eb4ed-7c7f-4aa7-a2af-99e028f6177f"/>
+				<imageExpression><![CDATA["0 coronavirus.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="718" height="30" backcolor="#FFB347" uuid="f56e3619-bcb6-46e7-ab37-e6a832225340">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="160" y="0" width="160" height="30" forecolor="#00235A" uuid="63f8a90c-c404-4fab-85ce-f582e0a5b9df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8754e654-c97d-4690-b74d-fcc61b36162a"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[País que recibe la ayuda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="80" height="30" forecolor="#00235A" uuid="782c6d00-5573-435d-bbbe-8dc7bf58e3dc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="191d477d-ccc5-49b6-8ef8-6b5f1c0cda25"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Donación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="160" height="30" forecolor="#00235A" uuid="239d6016-f62a-4a5f-aa8b-87123160438d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d51348d8-6a57-478f-a37c-268881133d73"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de Insumos donados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="159" height="30" forecolor="#00235A" uuid="be07e3dc-f2a1-4b68-89e2-31c03aff8b0c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="689dbbfe-f733-4f61-98ac-bf78e2c46fff"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#00235A"/>
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[País que ofrece la ayuda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="0" width="158" height="30" forecolor="#00235A" uuid="ac7ce109-dd29-4131-a95b-519ced9994b9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b491be56-bf19-4e6f-a6b4-993fede8b6d2"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de Dinero Donado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="160" y="-1" width="160" height="68" uuid="0ec8541a-8bd0-498c-b982-9a356535aef9"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<imageExpression><![CDATA[$F{FOTO_RECIBE}]]></imageExpression>
+			</image>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="160" height="80" forecolor="#00235A" uuid="f02d622d-9b22-4567-8733-accd7b9c6d8e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b442db8-f1f3-42c9-b1d9-22617a0a89e6"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INSUMOSD}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="80" height="80" forecolor="#00235A" uuid="a9393ec8-99e5-4b48-9f9e-5e7ff1f68763">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f78b5d9b-bec8-43b3-a02f-9524eec99751"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_RECIBIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="560" y="0" width="158" height="80" forecolor="#00235A" uuid="8743269a-3d8b-4588-a4d8-ac543be6dbb6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DINERO_DONADO}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="67" width="160" height="12" forecolor="#00235A" uuid="db0d70db-6be0-49e2-9099-a502e869a000">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f78b5d9b-bec8-43b3-a02f-9524eec99751"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOM_ENVIA}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="160" y="67" width="160" height="12" forecolor="#00235A" uuid="cfa5291f-b24e-4328-b1a2-157b479fc25e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f78b5d9b-bec8-43b3-a02f-9524eec99751"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOM_RECIBE}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="-1" width="160" height="68" uuid="ac7afcd9-c319-42d5-9677-e7217abd91c4"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<imageExpression><![CDATA[$F{FOTO_ENVIA}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="636" y="0" width="60" height="13" forecolor="#00235A" uuid="b957830f-612c-4e0f-a583-78c399cf3da7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="696" y="0" width="22" height="13" forecolor="#00235A" uuid="f44b159f-ec20-48fa-ad4d-4139918ce484">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

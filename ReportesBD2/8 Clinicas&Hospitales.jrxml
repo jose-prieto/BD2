@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1 Personas" pageWidth="841" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="801" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32917e05-ae42-4674-883d-b7aa97511420">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexReportes"/>
+	<subDataset name="Dataset1" uuid="c5ba9b4e-656b-4cc9-9b2b-9c9b66d5c310">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="ab194da4-58d8-45e5-a2d9-6824d65ee1d0">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString language="plsql">
+		<![CDATA[{call REPORT8($P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+	</field>
+	<field name="CAMAS_DISPONIBLES" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="CAMAS_DISPONIBLES"/>
+	</field>
+	<field name="ATENDIDOS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="ATENDIDOS"/>
+	</field>
+	<field name="FALLECIDOS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="FALLECIDOS"/>
+	</field>
+	<field name="RECUPERADOS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RECUPERADOS"/>
+	</field>
+	<field name="INSUMOS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="INSUMOS"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="210" y="0" width="379" height="69" forecolor="#00235A" uuid="1fc16c27-ce39-4a27-a126-6d90e37c9b1a"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Clínicas y hospitales disponibles para atender la pandemia]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="701" y="0" width="100" height="30" forecolor="#00235A" uuid="e05faa59-944b-4edc-b340-83151a3dfaa7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="40" y="-18" width="120" height="98" uuid="483eb4ed-7c7f-4aa7-a2af-99e028f6177f"/>
+				<imageExpression><![CDATA["0 coronavirus.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="801" height="30" backcolor="#FFB347" uuid="f56e3619-bcb6-46e7-ab37-e6a832225340">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="160" y="0" width="160" height="30" forecolor="#00235A" uuid="63f8a90c-c404-4fab-85ce-f582e0a5b9df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8754e654-c97d-4690-b74d-fcc61b36162a"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de la clínica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="80" height="30" forecolor="#00235A" uuid="782c6d00-5573-435d-bbbe-8dc7bf58e3dc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="191d477d-ccc5-49b6-8ef8-6b5f1c0cda25"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Camas Disponibles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="80" height="30" forecolor="#00235A" uuid="239d6016-f62a-4a5f-aa8b-87123160438d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d51348d8-6a57-478f-a37c-268881133d73"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Insumos Disponibles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="160" height="30" forecolor="#00235A" uuid="4df589ad-23c5-4fea-b354-3f939d4c94b3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b491be56-bf19-4e6f-a6b4-993fede8b6d2"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de Casos COVID-19 Atendidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="0" width="80" height="30" forecolor="#00235A" uuid="31975422-3b0f-4dea-8b73-e0e864d0d9c6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c94bd0b0-5154-4c7d-945b-d9421f09eda3"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fallecidos COVID-19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="720" y="0" width="81" height="30" forecolor="#00235A" uuid="42bbe6c2-0866-4a6c-8136-34164ee50dfe">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d31ad459-e003-4292-87fe-8ffe7a8a57be"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recuperados COVID-19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="160" height="30" forecolor="#00235A" uuid="be07e3dc-f2a1-4b68-89e2-31c03aff8b0c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="689dbbfe-f733-4f61-98ac-bf78e2c46fff"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="81" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="160" y="0" width="160" height="80" forecolor="#00235A" uuid="e29f3abb-e982-49cf-b0ab-788872983415">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97958708-9bde-4f5d-91d6-d2f958601545"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="80" height="80" forecolor="#00235A" uuid="f02d622d-9b22-4567-8733-accd7b9c6d8e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b442db8-f1f3-42c9-b1d9-22617a0a89e6"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INSUMOS}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="80" height="80" forecolor="#00235A" uuid="a9393ec8-99e5-4b48-9f9e-5e7ff1f68763">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f78b5d9b-bec8-43b3-a02f-9524eec99751"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAMAS_DISPONIBLES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="160" height="80" forecolor="#00235A" uuid="a3862ef4-6941-476d-a999-77495680d268">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="77addbc1-4933-4138-b253-8517dfd9e16d"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="160" height="80" forecolor="#00235A" uuid="8419bcea-8f76-4193-b649-1908a7322da1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8252744-598f-4645-9711-ea58030adc9e"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ATENDIDOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="0" width="81" height="80" forecolor="#00235A" uuid="20f75142-34f6-4153-902a-cbcb072e9b57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECUPERADOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="0" width="80" height="80" forecolor="#00235A" uuid="9c0b442a-c1c0-4df4-a0c3-2743794a3749">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63b7963f-cf3a-46a7-9262-baee1efdb356"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FALLECIDOS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="780" y="0" width="22" height="13" forecolor="#00235A" uuid="f44b159f-ec20-48fa-ad4d-4139918ce484">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="721" y="0" width="60" height="13" forecolor="#00235A" uuid="b957830f-612c-4e0f-a583-78c399cf3da7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>
