@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1 Personas" pageWidth="520" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="480" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32917e05-ae42-4674-883d-b7aa97511420">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexReportes"/>
+	<subDataset name="Dataset1" uuid="c5ba9b4e-656b-4cc9-9b2b-9c9b66d5c310">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="ab194da4-58d8-45e5-a2d9-6824d65ee1d0">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString language="plsql">
+		<![CDATA[{call REPORT13($P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="PAIS" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.label" value="PAIS"/>
+	</field>
+	<field name="FECHA_INICIO" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="FECHA_INICIO"/>
+	</field>
+	<field name="FECHA_FIN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FECHA_FIN"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="51" y="0" width="379" height="69" forecolor="#00235A" uuid="1fc16c27-ce39-4a27-a126-6d90e37c9b1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Cierre de Fronteras]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="370" y="0" width="100" height="30" forecolor="#00235A" uuid="e05faa59-944b-4edc-b340-83151a3dfaa7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="-18" width="120" height="98" uuid="483eb4ed-7c7f-4aa7-a2af-99e028f6177f"/>
+				<imageExpression><![CDATA["0 coronavirus.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="480" height="30" backcolor="#FFB347" uuid="f56e3619-bcb6-46e7-ab37-e6a832225340">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="160" y="0" width="160" height="30" forecolor="#00235A" uuid="63f8a90c-c404-4fab-85ce-f582e0a5b9df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8754e654-c97d-4690-b74d-fcc61b36162a"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="160" height="30" forecolor="#00235A" uuid="239d6016-f62a-4a5f-aa8b-87123160438d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d51348d8-6a57-478f-a37c-268881133d73"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="159" height="30" forecolor="#00235A" uuid="be07e3dc-f2a1-4b68-89e2-31c03aff8b0c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="689dbbfe-f733-4f61-98ac-bf78e2c46fff"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#00235A"/>
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[País]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="160" height="80" forecolor="#00235A" uuid="f02d622d-9b22-4567-8733-accd7b9c6d8e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b442db8-f1f3-42c9-b1d9-22617a0a89e6"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_FIN}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="160" height="79" uuid="ac7afcd9-c319-42d5-9677-e7217abd91c4"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#00235A"/>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<imageExpression><![CDATA[$F{PAIS}]]></imageExpression>
+			</image>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="160" y="0" width="160" height="80" forecolor="#00235A" uuid="693f3862-e8d3-4261-9249-74b18bf44f8b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b442db8-f1f3-42c9-b1d9-22617a0a89e6"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_INICIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="390" y="0" width="60" height="13" forecolor="#00235A" uuid="b957830f-612c-4e0f-a583-78c399cf3da7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="0" width="22" height="13" forecolor="#00235A" uuid="f44b159f-ec20-48fa-ad4d-4139918ce484">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

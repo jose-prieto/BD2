@@ -35,6 +35,9 @@
 	<field name="INSUMOS" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="INSUMOS"/>
 	</field>
+	<field name="DIRECCION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DIRECCION"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -203,6 +206,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{DIRECCION}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="480" y="0" width="160" height="80" forecolor="#00235A" uuid="8419bcea-8f76-4193-b649-1908a7322da1">
